@@ -1,3 +1,5 @@
+import { reducer } from '../utils/reducers';
+
 //he src folder of your React app, create a new folder called __tests__. Now, these tests we are about to write aren't React-specific, as they don't test how a UI component will behave. These tests will work more like the tests we've written in the past, where we test purely the functionality of our reducers to see if we get the intended output. This will help us understand the purpose of reducer functions as well.
 
 //In that directory, create a file called reducers.test.js. Before we start writing our tests and reducer functionality, it's critical to understand what the purpose of a reducer is.
@@ -76,3 +78,23 @@ test('UPDATE_PRODUCTS', ()=> {
 });
 
 //Now that our first test is written and we have a basic understanding of how it will work, let's actually create that reducer() function. In the reducers.js file in the utils folder
+
+test('UPDATE_CATEGORIES', () => {
+    let newState = reducer(initialState, {
+        type: UPDATE_CATEGORIES,
+        categories: [{}, {}]
+    });
+
+    expect(newState.categories.length).toBe(2);
+    expect(initialState.categories.length).toBe(1);
+});
+
+test('UPDATE_CURRENT_CATEGORY', () => {
+    let newState = reducer(initialState, {
+      type: UPDATE_CURRENT_CATEGORY,
+      currentCategory: '2'
+    });
+  
+    expect(newState.currentCategory).toBe('2');
+    expect(initialState.currentCategory).toBe('1');
+  });
